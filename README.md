@@ -1,35 +1,48 @@
-# Stripe Integration Risk Scanner
+# Stripe Integration Risk Scanner 🔍
 
-A CLI tool that scans your Stripe integration for security risks, compliance issues, and best practice violations. Helps identify dangerous API usage patterns, missing idempotency keys, insecure webhook configurations, PCI/SCA misconfigurations, and over-collection of PII.
+A comprehensive CLI tool that scans your Stripe integration for security risks, compliance issues, and best practice violations. Identifies dangerous API usage patterns, missing idempotency keys, insecure webhook configurations, PCI/SCA misconfigurations, and over-collection of PII.
 
-## Why Stripe Would Care
+## 🎯 Why Stripe Would Care
 
 - **Reduces platform-wide fraud & outages** - Catches integration issues before they cause problems
 - **Improves developer quality across ecosystem** - Helps developers build more secure integrations
 - **Lowers Stripe support load** - Prevents common issues that lead to support tickets
 - **Protects Stripe's brand** - Ensures merchants follow security best practices
+- **Strategic acquisition signal** - Stripe loves tools that improve ecosystem hygiene
 
-## Features
+## ✨ Features
 
 - 🔍 **Comprehensive Scanning**: Checks API usage, webhooks, idempotency, PCI compliance, and PII collection
-- 📊 **Risk Scoring**: Calculates a risk score based on issue severity
+- 📊 **Risk Scoring**: Calculates a risk score (0-100%) based on issue severity
 - 📝 **Multiple Output Formats**: Console, JSON, or HTML reports
 - ⚡ **Fast**: Parallel scanning of all security checks
 - 🔒 **Safe**: Uses read-only API access (works with restricted keys)
+- 🎨 **Beautiful Reports**: HTML reports with color-coded severity levels
 
-## Installation
+## 📦 Installation
+
+### Global Installation
 
 ```bash
 npm install -g stripe-integration-risk-scanner
 ```
 
-Or use with npx:
+### Using npx (No Installation)
 
 ```bash
 npx stripe-integration-risk-scanner
 ```
 
-## Usage
+### Local Development
+
+```bash
+git clone https://github.com/yourusername/stripe-integration-risk-scanner.git
+cd stripe-integration-risk-scanner
+npm install
+npm run build
+```
+
+## 🚀 Usage
 
 ### Basic Usage
 
@@ -61,45 +74,52 @@ stripe-audit --key sk_test_... --output json --file report.json
 stripe-audit --key sk_test_... --output html --file report.html
 ```
 
-## What It Scans
+## 🔎 What It Scans
 
 ### API Usage Scanner
 - ✅ Overly broad API keys (should use restricted keys)
 - ✅ Missing idempotency keys
 - ✅ Test keys in production
 - ✅ Dangerous API patterns
+- ✅ Account access permissions
 
 ### Webhook Scanner
 - ✅ Missing webhook signature verification
 - ✅ Insecure webhook URLs (HTTP instead of HTTPS)
 - ✅ Disabled webhook endpoints
 - ✅ Localhost webhooks in production
+- ✅ Webhook endpoint configuration
 
 ### Idempotency Scanner
 - ✅ Duplicate charge patterns
 - ✅ Missing idempotency keys for refunds
 - ✅ Best practice recommendations
+- ✅ Potential duplicate transactions
 
 ### PCI Compliance Scanner
 - ✅ SCA (3D Secure) compliance for EU
 - ✅ Card data handling practices
 - ✅ Payment method security
 - ✅ CVV storage warnings
+- ✅ PCI scope reduction recommendations
 
 ### PII Scanner
 - ✅ Over-collection of sensitive data
 - ✅ Sensitive PII in metadata
 - ✅ GDPR compliance recommendations
 - ✅ Data retention policies
+- ✅ Data minimization principles
 
-## Risk Score
+## 📊 Risk Score Calculation
 
 The tool calculates a risk score (0-100%) based on:
 - **High severity issues**: 10 points each
 - **Medium severity issues**: 5 points each
 - **Low severity issues**: 1 point each
 
-## Example Output
+Score = (Total Points / Max Possible Points) × 100
+
+## 📋 Example Output
 
 ```
 Stripe Integration Risk Scan Report
@@ -108,6 +128,8 @@ Stripe Integration Risk Scan Report
 Risk Score: 45%
   Total Issues: 8
   High: 2 | Medium: 4 | Low: 2
+
+Account ID: acct_1234567890
 
 🔴 HIGH SEVERITY ISSUES:
 
@@ -118,9 +140,17 @@ Risk Score: 45%
 2. signature_verification
    Verify webhook signature verification is implemented
    → Always verify webhook signatures using Stripe webhook secret
+
+🟡 MEDIUM SEVERITY ISSUES:
+
+1. idempotency_check
+   Verify idempotency keys are used for all charge/payment operations
+   → Always include idempotency_key parameter for idempotent operations
+
+...
 ```
 
-## Permissions
+## 🔐 Permissions
 
 The tool works best with a restricted API key that has read permissions for:
 - `charges:read`
@@ -129,27 +159,75 @@ The tool works best with a restricted API key that has read permissions for:
 - `customers:read`
 - `refunds:read`
 - `payment_methods:read`
+- `account:read`
 
 However, it will still work with limited permissions and report what it can check.
 
-## Development
+## 🛠️ Development
 
 ```bash
 # Install dependencies
 npm install
 
-# Build
+# Build TypeScript
 npm run build
 
-# Run in development
+# Run in development mode
 npm run dev -- --key sk_test_...
+
+# Run tests (if available)
+npm test
 ```
 
-## License
+## 📁 Project Structure
 
-MIT
+```
+stripe-integration-risk-scanner/
+├── src/
+│   ├── scanners/
+│   │   ├── apiUsageScanner.ts
+│   │   ├── webhookScanner.ts
+│   │   ├── idempotencyScanner.ts
+│   │   ├── pciScanner.ts
+│   │   └── piiScanner.ts
+│   ├── analyzer.ts
+│   ├── reporter.ts
+│   └── cli.ts
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
-## Contributing
+## 🤝 Contributing
 
 Contributions welcome! This tool is designed to improve Stripe ecosystem security and help developers build better integrations.
 
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+MIT License - see [LICENSE](LICENSE) file for details
+
+## 🙏 Acknowledgments
+
+- Built for the Stripe ecosystem
+- Inspired by security best practices
+- Designed to reduce fraud and improve developer experience
+
+## 🔗 Related Projects
+
+- [Stripe Revenue Leak Detector](../stripe-revenue-leak-detector)
+- [Stripe Compliance-as-Code](../stripe-compliance-as-code)
+- [Stripe Account Health Scoring](../stripe-account-health-scoring)
+
+## 📧 Support
+
+For issues, questions, or contributions, please open an issue on GitHub.
+
+---
+
+**Made with ❤️ for the Stripe ecosystem**
