@@ -1,6 +1,34 @@
 # Stripe Integration Risk Scanner 🔍
 
+[![GitHub stars](https://img.shields.io/github/stars/yksanjo/stripe-integration-risk-scanner?style=social)](https://github.com/yksanjo/stripe-integration-risk-scanner)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Stripe](https://img.shields.io/badge/Stripe-635BFF?logo=stripe&logoColor=white)](https://stripe.com/)
+
 A comprehensive CLI tool that scans your Stripe integration for security risks, compliance issues, and best practice violations. Identifies dangerous API usage patterns, missing idempotency keys, insecure webhook configurations, PCI/SCA misconfigurations, and over-collection of PII.
+
+## 📸 Screenshots
+
+### Console Output
+```
+Stripe Integration Risk Scan Report
+============================================================
+
+Risk Score: 45%
+  Total Issues: 8
+  High: 2 | Medium: 4 | Low: 2
+
+🔴 HIGH SEVERITY ISSUES:
+1. overly_broad_key
+   API key appears to have full account access
+   → Use restricted API keys with minimal required permissions
+```
+
+### HTML Report
+![HTML Report Preview](https://via.placeholder.com/800x600/635BFF/FFFFFF?text=Stripe+Risk+Scanner+HTML+Report)
+
+*Note: Add actual screenshot of HTML report after running the tool*
 
 ## 🎯 Why Stripe Would Care
 
@@ -36,7 +64,7 @@ npx stripe-integration-risk-scanner
 ### Local Development
 
 ```bash
-git clone https://github.com/yourusername/stripe-integration-risk-scanner.git
+git clone https://github.com/yksanjo/stripe-integration-risk-scanner.git
 cd stripe-integration-risk-scanner
 npm install
 npm run build
@@ -139,7 +167,7 @@ Account ID: acct_1234567890
 
 2. signature_verification
    Verify webhook signature verification is implemented
-   → Always verify webhook signatures using Stripe webhook secret
+   → Always verify webhook signatures using Stripe webhook secret to prevent unauthorized requests
 
 🟡 MEDIUM SEVERITY ISSUES:
 
@@ -220,9 +248,9 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## 🔗 Related Projects
 
-- [Stripe Revenue Leak Detector](../stripe-revenue-leak-detector)
-- [Stripe Compliance-as-Code](../stripe-compliance-as-code)
-- [Stripe Account Health Scoring](../stripe-account-health-scoring)
+- [Stripe Revenue Leak Detector](https://github.com/yksanjo/stripe-revenue-leak-detector)
+- [Stripe Compliance-as-Code](https://github.com/yksanjo/stripe-compliance-as-code)
+- [Stripe Account Health Scoring](https://github.com/yksanjo/stripe-account-health-scoring)
 
 ## 📧 Support
 
